@@ -9,6 +9,11 @@ const app=express();
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("Backend Working Fine 🚀");
+});
+
+
 app.post("/employees", async (req, res) => {
     const data=req.body;
     await EmployeeModel.create({
