@@ -83,15 +83,22 @@ app.get("/loggeduser", async (req, res) => {
   res.status(200).json(data);
 
 });
+
 app.delete("/loggeduser", async (req, res) => {
+  try {
+    const result = await LoggedInUserModel.deleteMany({});
 
-  await LoggedInUserModel.deleteMany({});
-
-  res.status(200).json({
-    message: "All data cleared successfully"
-  });
-
+    res.status(200).json({
+      message: "All data cleared successfully",
+      deletedCount: result.deletedCount
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
 });
+
 app.put("/employees/:id", async (req, res) => {
 
   const data = await EmployeeModel.findByIdAndUpdate(
