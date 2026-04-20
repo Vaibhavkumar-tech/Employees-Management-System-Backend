@@ -3,6 +3,7 @@ const EmployeeModel=require("./models/Employees.model")
 const AdminModel=require("./models/Admin.model")
 const LoggedInUserModel=require("./models/LogInUser.model")
 const cors = require("cors");
+const connectionDB = require("./db/db");
 
 
 const app=express();
