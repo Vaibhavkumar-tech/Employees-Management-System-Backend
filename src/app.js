@@ -53,13 +53,11 @@ app.post("/admin", async (req, res) => {
 
 app.get("/employees", async (req, res) => {
   try {
+    await connectionDB();   // reconnect ensure
     const data = await EmployeeModel.find();
-    res.status(200).json(data);
+    res.json(data);
   } catch (error) {
-    console.log("Employees Error:", error);
-    res.status(500).json({
-      message: error.message
-    });
+    res.status(500).json({ message: error.message });
   }
 });
 
