@@ -52,8 +52,15 @@ app.post("/admin", async (req, res) => {
 });
 
 app.get("/employees", async (req, res) => {
-  const data = await EmployeeModel.find();
-  res.json(data);
+  try {
+    const data = await EmployeeModel.find();
+    res.status(200).json(data);
+  } catch (error) {
+    console.log("Employees Error:", error);
+    res.status(500).json({
+      message: error.message
+    });
+  }
 });
 
 app.get("/admin", async (req, res) => {
